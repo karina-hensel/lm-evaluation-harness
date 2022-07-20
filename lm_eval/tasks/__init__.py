@@ -287,6 +287,11 @@ TASK_REGISTRY = {
     # "storycloze_2016": storycloze.StoryCloze2016,
     # "storycloze_2018": storycloze.StoryCloze2018,
     # "sat": sat.SATAnalogies,
+
+    # X-Stance, GNAD10, German Legal Entity Recognition
+    "x_stance": x_stance.XStance,
+    "gnad10": gnad10.GNAD10,
+    "german_legal_entity_recognition": german_legal_entity_recognition.GermanLegalEntityRecognition,
 }
 
 
