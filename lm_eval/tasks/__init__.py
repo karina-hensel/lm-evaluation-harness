@@ -51,6 +51,10 @@ from . import asdiv
 from . import gsm8k
 from . import storycloze
 
+from . import x_stance
+from . import gnad10
+from . import german_legal_entity_recognition
+
 ########################################
 # Translation tasks
 ########################################
