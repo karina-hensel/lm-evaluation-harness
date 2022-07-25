@@ -54,8 +54,8 @@ def _german_ler_agg_f1(key, items):
     f1_metric = datasets.load_metric("f1")
     return f1_metric.compute(references=references, predictions=predictions, average='macro', labels= np.unique(predictions))[key]
 
-class GermanLegalEntityRecognition(Task):
-    """VERSION = 0
+"""class GermanLegalEntityRecognition(Task):
+    VERSION = 0
     DATASET_PATH = 'german_legal_entity_recognition'
     DATASET_NAME = 'all'
 
@@ -91,7 +91,7 @@ class GermanLegalEntityRecognition(Task):
 
         return " " + str(target)
 
-    def construct_requests(self, doc, ctx):
+    def construct_requests(self, doc, ctx):"""
         """Uses RequestFactory to construct Requests and returns an iterable of
         Requests which will be sent to the LM.
 
@@ -104,7 +104,7 @@ class GermanLegalEntityRecognition(Task):
             part of the document for `doc`.
         """
         
-        b_person = rf.loglikelihood(ctx, " "+"B-PER")
+        """b_person = rf.loglikelihood(ctx, " "+"B-PER")
         b_judge = rf.loglikelihood(ctx, " "+"B-RR")
         b_laywer = rf.loglikelihood(ctx, " "+"B-AN")
         b_country = rf.loglikelihood(ctx, " "+"B-LD")
@@ -148,7 +148,7 @@ class GermanLegalEntityRecognition(Task):
 
         return b_person, b_judge, b_laywer, b_country, b_city, b_street, b_landscape, b_organization, b_company, b_institution, b_court, b_brand, b_law, b_ordinance, b_eu_legal_norm, b_regulation, b_contract, b_court_decision, b_legal_literature, i_person, i_judge, i_laywer, i_country, i_city, i_street, i_landscape, i_organization, i_company, i_institution, i_court, i_brand, i_law, i_ordinance, i_eu_legal_norm, i_regulation, i_contract, i_court_decision, i_legal_literature, other
 
-    def process_results(self, doc, results):
+    def process_results(self, doc, results):"""
         """Take a single document and the LM results and evaluates, returning a
         dict where keys are the names of submetrics and values are the values of
         the metric for that one document
@@ -158,7 +158,7 @@ class GermanLegalEntityRecognition(Task):
         :param results:
             The results of the requests created in construct_requests.
         """
-        b_person, b_judge, b_laywer, b_country, b_city, b_street, b_landscape, b_organization, b_company, b_institution, b_court, b_brand, b_law, b_ordinance, b_eu_legal_norm, b_regulation, b_contract, b_court_decision, b_legal_literature, i_person, i_judge, i_laywer, i_country, i_city, i_street, i_landscape, i_organization, i_company, i_institution, i_court, i_brand, i_law, i_ordinance, i_eu_legal_norm, i_regulation, i_contract, i_court_decision, i_legal_literature, other = results
+        """b_person, b_judge, b_laywer, b_country, b_city, b_street, b_landscape, b_organization, b_company, b_institution, b_court, b_brand, b_law, b_ordinance, b_eu_legal_norm, b_regulation, b_contract, b_court_decision, b_legal_literature, i_person, i_judge, i_laywer, i_country, i_city, i_street, i_landscape, i_organization, i_company, i_institution, i_court, i_brand, i_law, i_ordinance, i_eu_legal_norm, i_regulation, i_contract, i_court_decision, i_legal_literature, other = results
         
         pred = float('-inf')
         
@@ -170,13 +170,13 @@ class GermanLegalEntityRecognition(Task):
         
         return {"acc": pred==true_label, "precision":(true_label, pred), "recall":(true_label, pred), "f1":(true_label, pred)}
 
-    def aggregation(self):
+    def aggregation(self):"""
         """
         :returns: {str: [metric_score] -> float}
             A dictionary where keys are the names of submetrics and values are
             functions that aggregate a list of metric scores
         """
-        return {"acc":mean, "precision": partial(_german_ler_agg_precision, "precision"), 
+        """return {"acc":mean, "precision": partial(_german_ler_agg_precision, "precision"), 
                 "recall" : partial(_german_ler_agg_recall, "recall"), 
                 "f1" : partial(_german_ler_agg_f1, "f1")}
 
@@ -233,49 +233,9 @@ class GermanLegalEntityRecognition(Task):
             part of the document for `doc`.
         """
         
-        b_person = rf.loglikelihood(ctx, " "+"B-PER")
-        b_judge = rf.loglikelihood(ctx, " "+"B-RR")
-        b_laywer = rf.loglikelihood(ctx, " "+"B-AN")
-        b_country = rf.loglikelihood(ctx, " "+"B-LD")
-        b_city = rf.loglikelihood(ctx, " "+"B-ST")
-        b_street = rf.loglikelihood(ctx, " "+"B-STR")
-        b_landscape = rf.loglikelihood(ctx, " "+"B-LDS")
-        b_organization = rf.loglikelihood(ctx, " "+"B-ORG")
-        b_company = rf.loglikelihood(ctx, " "+"B-UN")
-        b_institution = rf.loglikelihood(ctx, " "+"B-INN")
-        b_court = rf.loglikelihood(ctx, " "+"B-GRT")
-        b_brand = rf.loglikelihood(ctx, " "+"B-MRK")
-        b_law = rf.loglikelihood(ctx, " "+"B-GS")
-        b_ordinance = rf.loglikelihood(ctx, " "+"B-VO")
-        b_eu_legal_norm = rf.loglikelihood(ctx, " "+"B-EUN")
-        b_regulation = rf.loglikelihood(ctx, " "+"B-VS")
-        b_contract = rf.loglikelihood(ctx, " "+"B-VT")
-        b_court_decision = rf.loglikelihood(ctx, " "+"B-RS")
-        b_legal_literature = rf.loglikelihood(ctx, " "+"B-LIT")
+        ner_tag_sequence = rf.greedy_until(ctx, ["\n"])    
 
-        i_person = rf.loglikelihood(ctx, " "+"I-PER")
-        i_judge = rf.loglikelihood(ctx, " "+"I-RR")
-        i_laywer = rf.loglikelihood(ctx, " "+"I-AN")
-        i_country = rf.loglikelihood(ctx, " "+"I-LD")
-        i_city = rf.loglikelihood(ctx, " "+"I-ST")
-        i_street = rf.loglikelihood(ctx, " "+"I-STR")
-        i_landscape = rf.loglikelihood(ctx, " "+"I-LDS")
-        i_organization = rf.loglikelihood(ctx, " "+"I-ORG")
-        i_company = rf.loglikelihood(ctx, " "+"I-UN")
-        i_institution = rf.loglikelihood(ctx, " "+"I-INN")
-        i_court = rf.loglikelihood(ctx, " "+"I-GRT")
-        i_brand = rf.loglikelihood(ctx, " "+"I-MRK")
-        i_law = rf.loglikelihood(ctx, " "+"I-GS")
-        i_ordinance = rf.loglikelihood(ctx, " "+"I-VO")
-        i_eu_legal_norm = rf.loglikelihood(ctx, " "+"I-EUN")
-        i_regulation = rf.loglikelihood(ctx, " "+"I-VS")
-        i_contract = rf.loglikelihood(ctx, " "+"I-VT")
-        i_court_decision = rf.loglikelihood(ctx, " "+"I-RS")
-        i_legal_literature = rf.loglikelihood(ctx, " "+"I-LIT")
-
-        other = rf.loglikelihood(ctx, " "+"O")
-
-        return b_person, b_judge, b_laywer, b_country, b_city, b_street, b_landscape, b_organization, b_company, b_institution, b_court, b_brand, b_law, b_ordinance, b_eu_legal_norm, b_regulation, b_contract, b_court_decision, b_legal_literature, i_person, i_judge, i_laywer, i_country, i_city, i_street, i_landscape, i_organization, i_company, i_institution, i_court, i_brand, i_law, i_ordinance, i_eu_legal_norm, i_regulation, i_contract, i_court_decision, i_legal_literature, other
+        return ner_tag_sequence
 
     def process_results(self, doc, results):
         """Take a single document and the LM results and evaluates, returning a
@@ -287,13 +247,7 @@ class GermanLegalEntityRecognition(Task):
         :param results:
             The results of the requests created in construct_requests.
         """
-        b_person, b_judge, b_laywer, b_country, b_city, b_street, b_landscape, b_organization, b_company, b_institution, b_court, b_brand, b_law, b_ordinance, b_eu_legal_norm, b_regulation, b_contract, b_court_decision, b_legal_literature, i_person, i_judge, i_laywer, i_country, i_city, i_street, i_landscape, i_organization, i_company, i_institution, i_court, i_brand, i_law, i_ordinance, i_eu_legal_norm, i_regulation, i_contract, i_court_decision, i_legal_literature, other = results
-        
-        pred = float('-inf')
-        
-        for i in results:
-          if i[0] > pred:
-            pred = results.index(i)
+        tag_sequence = results
                       
         true_label = doc['ner_tags']
         
