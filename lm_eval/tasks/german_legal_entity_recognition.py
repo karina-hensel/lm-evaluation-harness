@@ -82,7 +82,7 @@ def _german_ler_agg_f1(key, items):
         pass
       
     def doc_to_text(self, doc): 
-      return "tokens: "+ doc['tokens'] + "\n\n"+ "NER tag: "
+      return "tokens: "+ doc['tokens'] + ""+ "NER tag: "
 
     def doc_to_target(self, doc):
         # The prepended `" "` is required to space out the `doc_to_text` and
