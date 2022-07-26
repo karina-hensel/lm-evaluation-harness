@@ -57,7 +57,7 @@ def _german_ler_agg_f1(key, items):
 class GermanLegalEntityRecognition(Task):
     VERSION = 0
     DATASET_PATH = 'jfrenz/legalglue'
-    DATASET_NAME = 'german_ler'
+    DATASET_NAME = None#'german_ler'
 
     def has_training_docs(self):
         return True
@@ -106,7 +106,7 @@ class GermanLegalEntityRecognition(Task):
         
         ner_tag_sequence = rf.greedy_until(ctx, ["."])
 
-        while len(ner_tag_sequence) < len(ctx.split(' ')):
+        while len(ner_tag_sequence) < len(ctx.split(" ")):
             tmp = rf.greedy_until(ctx[len(ner_tag_sequence):], ["."])
             ner_tag_sequence += tmp
         print("Constructing requests")
