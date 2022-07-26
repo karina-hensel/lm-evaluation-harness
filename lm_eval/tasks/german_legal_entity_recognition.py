@@ -111,7 +111,7 @@ class GermanLegalEntityRecognition(Task):
             tmp = rf.greedy_until(ctx[len(ner_tag_sequence):], [str(38)])
             ner_tag_sequence += tmp
         print(ner_tag_sequence)
-        return ner_tag_sequence, rf.loglikelihood(ctx, [' '])
+        return ner_tag_sequence#, rf.loglikelihood(ctx, [' '])
 
     def process_results(self, doc, results):
         """Take a single document and the LM results and evaluates, returning a
@@ -126,8 +126,11 @@ class GermanLegalEntityRecognition(Task):
         tag_sequence = results
         print(tag_sequence)
         true_label = doc['ner_tags']
+
+        predictions = {"id":doc["id"], "tags":tag_sequence}
+        references = {"id":doc["id"], "true tags":doc["ner_tags"]}
         
-        return {"acc": pred==true_label, "precision":(true_label, pred), "recall":(true_label, pred), "f1":(true_label, pred)}
+        return {"acc": pred==true_label, "precision":(predictions, references), "recall":(predictions, references), "f1":(predictions, references)}
 
     def aggregation(self):
         """
