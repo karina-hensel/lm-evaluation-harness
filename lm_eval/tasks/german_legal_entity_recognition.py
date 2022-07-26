@@ -105,10 +105,10 @@ class GermanLegalEntityRecognition(Task):
         """
         
         print(ctx)
-        ner_tag_sequence = rf.greedy_until(ctx, [38])
+        ner_tag_sequence = rf.greedy_until(ctx, [str(38)])
 
         while len(ner_tag_sequence) < len(ctx.split(' ')):
-            tmp = rf.greedy_until(ctx[len(ner_tag_sequence):], [38])
+            tmp = rf.greedy_until(ctx[len(ner_tag_sequence):], [str(38)])
             ner_tag_sequence += tmp
         print(ner_tag_sequence)
         return ner_tag_sequence, rf.loglikelihood(ctx, [' '])
