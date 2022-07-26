@@ -252,7 +252,7 @@ class GermanLegalEntityRecognition(Task):
             The results of the requests created in construct_requests.
         """
         tag_sequence = results
-                      
+        print(tag_sequence)
         true_label = doc['ner_tags']
         
         return {"acc": pred==true_label, "precision":(true_label, pred), "recall":(true_label, pred), "f1":(true_label, pred)}
