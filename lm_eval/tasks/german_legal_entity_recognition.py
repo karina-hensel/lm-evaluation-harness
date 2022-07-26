@@ -87,8 +87,8 @@ class GermanLegalEntityRecognition(Task):
     def doc_to_target(self, doc):
         # The prepended `" "` is required to space out the `doc_to_text` and
         # `doc_to_target` strings.
-        target = doc['ner_tags']
-        print(target)
+        target = doc["ner_tags"]
+
         return " " + str(target)
 
     def construct_requests(self, doc, ctx):
@@ -104,14 +104,13 @@ class GermanLegalEntityRecognition(Task):
             part of the document for `doc`.
         """
         
-        print(ctx)
         ner_tag_sequence = rf.greedy_until(ctx, [str(38)])
 
         while len(ner_tag_sequence) < len(ctx.split(' ')):
             tmp = rf.greedy_until(ctx[len(ner_tag_sequence):], [str(38)])
             ner_tag_sequence += tmp
-        print(ner_tag_sequence)
-        return ner_tag_sequence#, rf.loglikelihood(ctx, [' '])
+        print("Constructing requests")
+        return ner_tag_sequence
 
     def process_results(self, doc, results):
         """Take a single document and the LM results and evaluates, returning a
@@ -124,12 +123,12 @@ class GermanLegalEntityRecognition(Task):
             The results of the requests created in construct_requests.
         """
         tag_sequence = results
-        print(tag_sequence)
-        true_label = doc['ner_tags']
+        
+        true_label = doc["ner_tags"]
 
         predictions = {"id":doc["id"], "tags":tag_sequence}
         references = {"id":doc["id"], "true tags":doc["ner_tags"]}
-        print(predictions, references)
+        print("Processing results")
         return {"acc": pred==true_label, "precision":(predictions, references), "recall":(predictions, references), "f1":(predictions, references)}
 
     def aggregation(self):
