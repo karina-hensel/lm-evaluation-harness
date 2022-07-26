@@ -238,7 +238,7 @@ class GermanLegalEntityRecognition(Task):
         while len(ner_tag_sequence) < len(ctx.split(' ')):
             tmp = rf.greedy_until(ctx[len(ner_tag_sequence):], [38])
             ner_tag_sequence += tmp
-
+        print(ner_tag_sequence)
         return ner_tag_sequence
 
     def process_results(self, doc, results):
