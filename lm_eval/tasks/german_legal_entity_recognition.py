@@ -184,8 +184,8 @@ def _german_ler_agg_f1(key, items):
         return {"acc":True, "precision":True, "recall":True, "f1":True}"""
 class GermanLegalEntityRecognition(Task):
     VERSION = 0
-    DATASET_PATH = 'jfrenz/legalglue'
-    DATASET_NAME = 'german_ler'
+    DATASET_PATH = 'jfrenz/legalglue/german_ler'
+    DATASET_NAME = None#'german_ler'
 
     def has_training_docs(self):
         return True
