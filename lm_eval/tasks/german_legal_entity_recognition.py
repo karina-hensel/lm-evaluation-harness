@@ -55,7 +55,7 @@ def _german_ler_agg_f1(key, items):
     return f1_metric.compute(references=references, predictions=predictions, average='macro', labels= np.unique(predictions))[key]
 
 class GermanLegalEntityRecognition(Task):
-    #VERSION = 0
+    VERSION = 0
     DATASET_PATH = 'jfrenz/legalglue'
     DATASET_NAME = 'german_ler'
 
