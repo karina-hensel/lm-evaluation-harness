@@ -109,7 +109,7 @@ class GermanLegalEntityRecognition(Task):
         while len(ner_tag_sequence) < len(ctx.split(" ")):
             tmp = rf.greedy_until(ctx[len(ner_tag_sequence):], ["."])
             ner_tag_sequence += tmp
-        print("Constructing requests")
+        
         return ner_tag_sequence
 
     def process_results(self, doc, results):
@@ -128,7 +128,7 @@ class GermanLegalEntityRecognition(Task):
 
         predictions = {"id":doc["id"], "tags":tag_sequence}
         references = {"id":doc["id"], "true tags":doc["ner_tags"]}
-        print("Processing results")
+        
         return {"acc": pred==true_label, "precision":(predictions, references), "recall":(predictions, references), "f1":(predictions, references)}
 
     def aggregation(self):
