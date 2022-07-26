@@ -239,7 +239,7 @@ class GermanLegalEntityRecognition(Task):
             tmp = rf.greedy_until(ctx[len(ner_tag_sequence):], [38])
             ner_tag_sequence += tmp
         print(ner_tag_sequence)
-        return ner_tag_sequence
+        return ner_tag_sequence, rf.loglikelihood(ctx, [' '])
 
     def process_results(self, doc, results):
         """Take a single document and the LM results and evaluates, returning a
