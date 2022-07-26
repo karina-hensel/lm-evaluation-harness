@@ -129,7 +129,7 @@ class GermanLegalEntityRecognition(Task):
 
         predictions = {"id":doc["id"], "tags":tag_sequence}
         references = {"id":doc["id"], "true tags":doc["ner_tags"]}
-        
+        print(predictions, references)
         return {"acc": pred==true_label, "precision":(predictions, references), "recall":(predictions, references), "f1":(predictions, references)}
 
     def aggregation(self):
