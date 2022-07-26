@@ -88,7 +88,7 @@ class GermanLegalEntityRecognition(Task):
         # The prepended `" "` is required to space out the `doc_to_text` and
         # `doc_to_target` strings.
         target = doc['ner_tags']
-        
+        print(target)
         return " " + str(target)
 
     def construct_requests(self, doc, ctx):
