@@ -232,7 +232,12 @@ class GermanLegalEntityRecognition(Task):
             part of the document for `doc`.
         """
         
-        ner_tag_sequence = rf.greedy_until(ctx, ["\n"])    
+
+        ner_tag_sequence = rf.greedy_until(ctx, [38])
+
+        while len(ner_tag_sequence) < len(ctx.split(' ')):
+            tmp = rf.greedy_until(ctx[len(ner_tag_sequence):], [38])
+            ner_tag_sequence += tmp
 
         return ner_tag_sequence
 
