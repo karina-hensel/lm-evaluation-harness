@@ -56,7 +56,7 @@ def _german_ler_agg_f1(key, items):
 
 class GermanLegalEntityRecognition(Task):
     VERSION = 0
-    DATASET_PATH = 'legalglue'
+    DATASET_PATH = 'jfrenz/legalglue'
     DATASET_NAME = 'german_ler'
 
     def has_training_docs(self):
