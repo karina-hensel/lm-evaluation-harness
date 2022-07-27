@@ -89,10 +89,10 @@ class GermanLegalEntityRecognition(Task):
         """
         
         ner_tag_sequence = rf.greedy_until(ctx, ["."])
-
-        while len(ner_tag_sequence[0]) < len(ctx.split(" ")):
+        print(ner_tag_sequence)
+        while len(list(ner_tag_sequence)) < len(ctx.split(" ")):
             tmp = rf.greedy_until(ctx[len(ner_tag_sequence):], ["."])
-            ner_tag_sequence += tmp
+            list(ner_tag_sequence) += tmp
         print("Constructing requests")
         return ner_tag_sequence
 
