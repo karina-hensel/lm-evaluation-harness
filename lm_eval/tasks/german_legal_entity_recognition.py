@@ -111,10 +111,10 @@ class GermanLegalEntityRecognition(Task):
         
         true_label = doc["ner_tags"]
 
-        predictions = tag_sequence
+        prediction = tag_sequence
         references = doc["ner_tags"]
-        print(predictions)
-        return {"acc": pred==true_label, "precision":(predictions, references), "recall":(predictions, references), "f1":(predictions, references)}
+        print(prediction)
+        return {"acc": prediction==true_label, "precision":(prediction, references), "recall":(prediction, references), "f1":(prediction, references)}
 
     def aggregation(self):
         """
