@@ -88,11 +88,12 @@ class GermanLegalEntityRecognition(Task):
             part of the document for `doc`.
         """
         
-        ner_tag_sequence = rf.greedy_until(ctx, ["."])
+        tmp = rf.greedy_until(ctx, ["."])
+        ner_tag_sequence = list(tmp)
         print(ner_tag_sequence)
         while len(list(ner_tag_sequence)) < len(ctx.split(" ")):
-            tmp = rf.greedy_until(ctx[len(ner_tag_sequence):], ["."])
-            list(ner_tag_sequence) += tmp
+            next_seq = rf.greedy_until(ctx[len(ner_tag_sequence):], ["."])
+            ner_tag_sequence += next_seq
         print("Constructing requests")
         return ner_tag_sequence
 
