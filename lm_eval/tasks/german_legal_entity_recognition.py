@@ -78,10 +78,12 @@ class GermanLegalEntityRecognition(Task):
             return self._training_docs
 
     def validation_docs(self):
-        pass
+        if self.has_validation_docs():
+            return self.dataset["validation"]
 
     def test_docs(self):
-        pass
+        if self.has_test_docs():
+            return self.dataset["test"]
       
     def doc_to_text(self, doc): 
         print("Extracting text")
