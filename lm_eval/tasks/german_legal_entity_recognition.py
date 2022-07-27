@@ -83,7 +83,7 @@ class GermanLegalEntityRecognition(Task):
       
     def doc_to_text(self, doc): 
         print("Extracting text")
-      return "tokens: "+ ' '.join(doc['tokens']) + "\n\n"+ "NER tags: "
+        return "tokens: "+ ' '.join(doc['tokens']) + "\n\n"+ "NER tags: "
 
     def doc_to_target(self, doc):
         # The prepended `" "` is required to space out the `doc_to_text` and
