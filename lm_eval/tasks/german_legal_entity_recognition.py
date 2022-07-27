@@ -72,7 +72,7 @@ class GermanLegalEntityRecognition(Task):
         if self.has_training_docs():
             if self._training_docs is None:
                 self._training_docs = list(self.dataset["train"])
-            
+                print("Processing docs")
             return self._training_docs
 
     def validation_docs(self):
@@ -82,13 +82,15 @@ class GermanLegalEntityRecognition(Task):
         pass
       
     def doc_to_text(self, doc): 
+        print("Extracting text")
       return "tokens: "+ ' '.join(doc['tokens']) + "\n\n"+ "NER tags: "
 
     def doc_to_target(self, doc):
         # The prepended `" "` is required to space out the `doc_to_text` and
         # `doc_to_target` strings.
-        target = doc["ner_tags"]
 
+        target = doc["ner_tags"]
+        print("Generating fewshot examples")
         return " " + str(target)
 
     def construct_requests(self, doc, ctx):
@@ -109,7 +111,7 @@ class GermanLegalEntityRecognition(Task):
         while len(ner_tag_sequence) < len(ctx.split(" ")):
             tmp = rf.greedy_until(ctx[len(ner_tag_sequence):], ["."])
             ner_tag_sequence += tmp
-        
+        print("Constructing requests")
         return ner_tag_sequence
 
     def process_results(self, doc, results):
