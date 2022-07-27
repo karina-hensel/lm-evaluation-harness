@@ -101,14 +101,10 @@ class GermanLegalEntityRecognition(Task):
         :param results:
             The results of the requests created in construct_requests.
         """
-        tag_sequence = results
-        
-        true_label = doc["ner_tags"]
-
-        prediction = tag_sequence
+        prediction = results
         references = doc["ner_tags"]
-        print(true_label)
-        return {"acc": prediction==true_label, "precision":(prediction, references), "recall":(prediction, references), "f1":(prediction, references)}
+
+        return {"acc": prediction==references, "precision":(prediction, references), "recall":(prediction, references), "f1":(prediction, references)}
 
     def aggregation(self):
         """
