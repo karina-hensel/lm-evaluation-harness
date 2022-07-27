@@ -56,8 +56,8 @@ def _german_ler_agg_f1(key, items):
 
 class GermanLegalEntityRecognition(Task):
     VERSION = 0
-    DATASET_PATH = 'wikiann'
-    DATASET_NAME = 'de'
+    DATASET_PATH = "wikiann"
+    DATASET_NAME = "de"
 
 
     def has_training_docs(self):
