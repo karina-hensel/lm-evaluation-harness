@@ -56,7 +56,7 @@ def _german_ler_agg_f1(key, items):
 
 class GermanLegalEntityRecognition(Task):
     VERSION = 0
-    DATASET_PATH = "wikiann"
+    DATASET_PATH = "strombergnlp/x-stance"
     DATASET_NAME = "de"
 
 
