@@ -19,7 +19,7 @@ import numpy as np
 _CITATION = """
 @inproceedings{leitner2019fine,
   author = {Elena Leitner and Georg Rehm and Julian Moreno-Schneider},
-  title = {{Fine-grained Named Entity Recognition in Legal Documents}},
+  title = {Fine-grained Named Entity Recognition in Legal Documents},
   booktitle = {Semantic Systems. The Power of AI and Knowledge
                   Graphs. Proceedings of the 15th International Conference
                   (SEMANTiCS 2019)},
@@ -35,7 +35,7 @@ _CITATION = """
   month = 9,
   note = {10/11 September 2019},
   pages = {272--287},
-  pdf = {https://link.springer.com/content/pdf/10.1007%2F978-3-030-33220-4_20.pdf}}
+  pdf = {https://link.springer.com/content/pdf/10.1007%2F978-3-030-33220-4_20.pdf}
 }"""
 
 # Helper functions for aggregation (separate function for each metric)
@@ -56,7 +56,7 @@ def _german_ler_agg_f1(key, items):
 
 class GermanLegalEntityRecognition(Task):
     VERSION = 0
-    DATASET_PATH = "strombergnlp/x-stance"
+    DATASET_PATH = "wikiann"
     DATASET_NAME = "de"
 
 
