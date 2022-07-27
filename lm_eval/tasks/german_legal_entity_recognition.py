@@ -58,9 +58,10 @@ class GermanLegalEntityRecognition(Task):
     VERSION = 0
     DATASET_PATH = 'germaner'
     DATASET_NAME = None
-    print(DATASET_NAME)
+
 
     def has_training_docs(self):
+        print(DATASET_NAME)
         return True
 
     def has_validation_docs(self):
