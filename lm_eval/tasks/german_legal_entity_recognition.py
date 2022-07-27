@@ -16,28 +16,6 @@ from lm_eval.metrics import mean
 from functools import partial
 import numpy as np
 
-_CITATION = """
-@inproceedings{leitner2019fine,
-  author = {Elena Leitner and Georg Rehm and Julian Moreno-Schneider},
-  title = {Fine-grained Named Entity Recognition in Legal Documents},
-  booktitle = {Semantic Systems. The Power of AI and Knowledge
-                  Graphs. Proceedings of the 15th International Conference
-                  (SEMANTiCS 2019)},
-  year = 2019,
-  editor = {Maribel Acosta and Philippe Cudré-Mauroux and Maria
-                  Maleshkova and Tassilo Pellegrini and Harald Sack and York
-                  Sure-Vetter},
-  keywords = {aip},
-  publisher = {Springer},
-  series = {Lecture Notes in Computer Science},
-  number = {11702},
-  address = {Karlsruhe, Germany},
-  month = 9,
-  note = {10/11 September 2019},
-  pages = {272--287},
-  pdf = {https://link.springer.com/content/pdf/10.1007%2F978-3-030-33220-4_20.pdf}
-}"""
-
 # Helper functions for aggregation (separate function for each metric)
 def _german_ler_agg_precision(key, items):
     references, predictions = zip(*items)
